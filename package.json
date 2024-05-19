@@ -4,6 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0",
     "prompt-sync": "^4.2.0"
   }
 }
