@@ -1,30 +1,31 @@
-import { useState, useEffect, useCallback } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
+import { searchByQuery } from "../services/api-client";
 import { Info } from 'lucide-react';
 import img from "../assets/2408132.jpg";
 
-const searchURL = import.meta.env.VITE_SEARCH;
-const apiKey = import.meta.env.VITE_API_KEY;
 
 export const Banner = () => {
   const [movie, setMovie] = useState({});
 
-  const fetchMovie = useCallback(async () => {
-    try {
-      const response = await axios.get(`${searchURL}?${apiKey}&query=ghost+in+the+shell`);
-      setMovie(response.data.results[0]);
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
+  const handleSuccess = (data) => {
+    setMovie(data[0]);
+  };
+
+  const handleError = (e) => {
+    console.error(`Error searching movie: ${e}`);
+  };
 
   useEffect(() => {
-    fetchMovie();
-  }, [fetchMovie]);
+    searchByQuery(
+      "Ghost in the Shell",
+      handleSuccess, 
+      handleError
+    );
+  }, []);
 
   return (
     <section 
-      className="flex flex-col px-10 md:px-20 justify-center bg-cover bg-center h-[30vh] bg-no-repeat w-[100%] md:h-[40vh] lg:h-[85vh] text-gray-50"
+      className="flex flex-col px-10 pb-10 md:px-20 md:pb-0 justify-end md:justify-center bg-cover bg-center h-[30vh] bg-no-repeat w-[100%] md:h-[40vh] lg:h-[90vh] text-gray-50"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${img})`
       }}
