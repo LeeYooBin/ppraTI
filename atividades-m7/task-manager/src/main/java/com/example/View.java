@@ -1,3 +1,5 @@
+package com.example;
+
 import java.util.Scanner;
 
 class View {
@@ -101,4 +103,3 @@ class View {
     scanner.nextLine();
   }
 }
-
